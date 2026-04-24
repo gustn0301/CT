@@ -101,9 +101,13 @@
 
     /* QR 코드 */
     .qr-wrap {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 12px;
+      width: 95px;
+      height: 95px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
     }
 
     .qr-wrap img {
@@ -127,7 +131,7 @@
 
     /* 날짜/시간 */
     .datetime {
-      font-size: 17px;
+      font-size: 22px;
       color: #111;
       margin-bottom: 18px;
       display: flex;
@@ -176,8 +180,11 @@
       position: fixed;
       bottom: 0;
       right: 0;
-      width: 180px;
-      opacity: 0.07;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      object-position: bottom right;
+      opacity: 0.12;
       pointer-events: none;
       z-index: 0;
     }
@@ -208,7 +215,7 @@
     <!-- QR 코드: src를 본인 QR 이미지 경로로 교체 -->
     <div class="qr-wrap">
       <img src="qr.png" alt="QR코드"
-        onerror="this.parentElement.innerHTML='<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'><rect x=\'5\' y=\'5\' width=\'110\' height=\'110\' rx=\'4\' fill=\'none\' stroke=\'#222\' stroke-width=\'3\'/><text x=\'60\' y=\'65\' text-anchor=\'middle\' font-size=\'11\' fill=\'#555\'>QR코드</text></svg>';" />
+        onerror="this.parentElement.innerHTML='<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'95\' height=\'95\' viewBox=\'0 0 95 95\'><rect x=\'3\' y=\'3\' width=\'89\' height=\'89\' rx=\'4\' fill=\'none\' stroke=\'#222\' stroke-width=\'2\'/><text x=\'47\' y=\'52\' text-anchor=\'middle\' font-size=\'10\' fill=\'#555\'>QR코드</text></svg>';" />
     </div>
 
     <!-- 날짜 및 시간 -->
@@ -230,12 +237,7 @@
     </div>
   </div>
 
-  <!-- 워터마크 (SVG로 간단 표현) -->
-  <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="160" cy="160" r="140" fill="none" stroke="#888" stroke-width="3"/>
-    <circle cx="160" cy="160" r="100" fill="none" stroke="#888" stroke-width="2"/>
-    <text x="100" y="175" text-anchor="middle" font-size="28" fill="#888">★</text>
-  </svg>
+  <img src="watermark.png" class="watermark" alt="" />
 
   <script>
     // 현재 시간 실시간 표시
