@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>PX 인증</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #ffffff;
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 60px;
+      min-height: 100vh;
+    }
+
+    /* 새로고침 버튼 */
+    .refresh-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #e8e8e8;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      cursor: pointer;
+    }
+
+    .refresh-btn svg {
+      width: 26px;
+      height: 26px;
+      color: #555;
+    }
+
+    /* 프로필 사진 */
+    .profile-img-wrap {
+      width: 210px;
+      height: 210px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .profile-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 이름 */
+    .name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    /* 관계 */
+    .relation {
+      font-size: 17px;
+      color: #333;
+      margin-bottom: 18px;
+    }
+
+    /* 승인완료 버튼 */
+    .approve-btn {
+      width: 88%;
+      max-width: 340px;
+      background: #3a0ca3;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 0;
+      margin-bottom: 24px;
+      cursor: default;
+      letter-spacing: 1px;
+    }
+
+    /* QR 코드 */
+    .qr-wrap {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 12px;
+    }
+
+    .qr-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* QR 플레이스홀더 (이미지 없을 때) */
+    .qr-placeholder {
+      width: 120px;
+      height: 120px;
+      border: 2px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    /* 날짜/시간 */
+    .datetime {
+      font-size: 17px;
+      color: #111;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .datetime .time {
+      color: #e63a2e;
+      font-weight: 700;
+    }
+
+    /* 이용 가능 항목 */
+    .usage-list {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 22px;
+    }
+
+    .usage-item {
+      font-size: 19px;
+      font-weight: 700;
+      color: #7c3aed;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .usage-item::before {
+      content: "○";
+      font-size: 15px;
+      margin-right: 4px;
+    }
+
+    /* 하단 안내 */
+    .notice {
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* 배경 워터마크 */
+    .watermark {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 180px;
+      opacity: 0.07;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- 새로고침 버튼 -->
+    <button class="refresh-btn" onclick="location.reload()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1 4 1 10 7 10"></polyline>
+        <path d="M3.51 15a9 9 0 1 0 .49-4.5"></path>
+      </svg>
+    </button>
+
+    <!-- 프로필 사진: src를 본인 사진 경로로 교체 -->
+    <div class="profile-img-wrap">
+      <img src="photo.jpg" alt="프로필 사진"
+        onerror="this.parentElement.style.background='#ddd'; this.style.display='none';" />
+    </div>
+
+    <!-- 이름 -->
+    <div class="name">윤현수</div>
+
+    <!-- 관계 -->
+    <div class="relation">윤성열의 손자</div>
+
+    <!-- 승인완료 버튼 -->
+    <button class="approve-btn">승인완료</button>
+
+    <!-- QR 코드: src를 본인 QR 이미지 경로로 교체 -->
+    <div class="qr-wrap">
+      <img src="qr.png" alt="QR코드"
+        onerror="this.parentElement.innerHTML='<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'><rect x=\'5\' y=\'5\' width=\'110\' height=\'110\' rx=\'4\' fill=\'none\' stroke=\'#222\' stroke-width=\'3\'/><text x=\'60\' y=\'65\' text-anchor=\'middle\' font-size=\'11\' fill=\'#555\'>QR코드</text></svg>';" />
+    </div>
+
+    <!-- 날짜 및 시간 -->
+    <div class="datetime">
+      <span id="date-text">2026년 04월 19일</span>
+      <span class="time" id="time-text">17:15:38</span>
+    </div>
+
+    <!-- 이용 가능 목록 -->
+    <div class="usage-list">
+      <div class="usage-item">마트 이용 가능</div>
+      <div class="usage-item">호텔콘도 이용 가능</div>
+    </div>
+
+    <!-- 안내 문구 -->
+    <div class="notice">
+      국방복지 회원임을 증명합니다.<br />
+      ※캡쳐된 화면은 사용이 불가능합니다.
+    </div>
+  </div>
+
+  <!-- 워터마크 (SVG로 간단 표현) -->
+  <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="160" cy="160" r="140" fill="none" stroke="#888" stroke-width="3"/>
+    <circle cx="160" cy="160" r="100" fill="none" stroke="#888" stroke-width="2"/>
+    <text x="100" y="175" text-anchor="middle" font-size="28" fill="#888">★</text>
+  </svg>
+
+  <script>
+    // 현재 시간 실시간 표시
+    function updateTime() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+
+      document.getElementById('date-text').textContent = `${y}년 ${m}월 ${d}일`;
+      document.getElementById('time-text').textContent = `${hh}:${mm}:${ss}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
